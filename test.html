@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Item Adder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <input type="text" id="title" placeholder="Title">
+    <input type="text" id="hint" placeholder="Hint">
+    <textarea id="about" placeholder="About"></textarea>
+    <button class="btn" id="applynew"><i class="fa-solid fa-plus"></i> Add New</button>
+
+    <div id="container"></div>
+
+    <div id="popup" style="display:none;">Popup content here</div>
+
+    <script src="script.js"></script>
+    <script>
+        var title = document.getElementById("title");
+var hint = document.getElementById("hint");
+var about = document.getElementById("about");
+var applynew = document.getElementById("applynew");
+var container = document.getElementById("container");
+var popup = document.getElementById("popup");
+
+applynew.addEventListener("click", function(event) {
+    event.preventDefault();
+    
+    var div = document.createElement("div");
+    div.setAttribute("class", "cart"); // Changed ID to class for multiple items
+    div.innerHTML = `
+        <h1>${title.value}</h1>
+        <h3>${hint.value}</h3>
+        <p>${about.value}</p>
+        <button class="btn" onclick="deleteItem(this)"><i class="fa-solid fa-xmark fa-lg"></i></button>`;
+    
+    container.append(div);
+    popup.style.display = "none";
+
+    // Clear the input fields after adding
+    title.value = "";
+    hint.value = "";
+    about.value = "";
+});
+
+function deleteItem(button) {
+    var item = button.parentElement; // Get the parent div of the button
+    item.remove(); // Remove the div
+}
+
+    </script>
+</body>
+</html>
